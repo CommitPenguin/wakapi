@@ -1,0 +1,18 @@
+services:
+  wakapi:
+    build:
+      context: ..
+    image: homelab/wakapi:local
+    container_name: wakapi
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Berlin
+      ENVIRONMENT: prod
+      WAKAPI_DB_TYPE: sqlite3
+      WAKAPI_DB_NAME: /data/wakapi.db
+      WAKAPI_PUBLIC_URL: https://wakapi.home.lan
+      WAKAPI_ALLOW_SIGNUP: "false"
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./data:/data
